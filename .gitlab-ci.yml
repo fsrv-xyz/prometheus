@@ -8,6 +8,7 @@ golint:
   before_script:
     - apk add go
     - go get -u golang.org/x/lint/golint
+    - export PATH=$PATH:/root/go/bin/
   script:
     - golint *
   image: alpine
