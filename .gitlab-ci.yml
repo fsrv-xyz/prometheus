@@ -10,6 +10,6 @@ golint:
     - go get -u golang.org/x/lint/golint
     - export PATH=$PATH:/root/go/bin/
   script:
-    - golint *
+    - golint *.go
   image: alpine
 
