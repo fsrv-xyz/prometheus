@@ -13,11 +13,19 @@ type QueryResponse struct {
 	Status   string `json:"status"`
 	Data     struct {
 		ResultType string `json:"resultType"`
-		Result     []struct {
-			Metric map[string]string `json:"metric"`
-			Value  []interface{}     `json:"value"`
-		} `json:"result"`
+		Result []QueryResult `json:"result"`
 	} `json:"data"`
+}
+
+// QueryResult - Key-Value formated output of the query
+type QueryResult struct {
+	Metric map[string]string `json:"metric"`
+	Value  []interface{}     `json:"value"`
+}
+
+// Results - Only returns the Results of the Query
+func (obj *QueryResponse) Results() {
+  return obj.Data.Results
 }
 
 // Query - fetch the data from prometheus API
@@ -32,3 +40,4 @@ func (c Client) Query(metric string) QueryResponse {
 	json.Unmarshal(data, &obj)
 	return obj
 }
+
