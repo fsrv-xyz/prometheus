@@ -1,3 +1,3 @@
-module prometheus-api-client-go
+module prometheus
 
 go 1.15

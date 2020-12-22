@@ -1,4 +1,4 @@
-package prometheus-api-client-go
+package prometheus
 
 import (
 	"encoding/json"
