@@ -1,0 +1,14 @@
+---
+stages:
+  - lint
+
+golint:
+  stage: lint
+  tags: [cluster]
+  before_script:
+    - apk add go
+    - go get -u golang.org/x/lint/golint
+  script:
+    - golint *
+  image: alpine
+
