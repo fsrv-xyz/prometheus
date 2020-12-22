@@ -24,7 +24,7 @@ type QueryResult struct {
 }
 
 // Results - Only returns the Results of the Query
-func (obj *QueryResponse) Results() {
+func (obj *QueryResponse) Results() []QueryResult {
   return obj.Data.Results
 }
 
