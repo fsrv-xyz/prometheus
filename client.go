@@ -1,4 +1,4 @@
-package prometheus
+package prometheus-api-client-go
 
 // Client - A simple prometheus api client
 type Client struct {
