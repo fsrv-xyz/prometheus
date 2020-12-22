@@ -7,29 +7,23 @@ import (
 	"net/http"
 )
 
-// QueryResponse - The return data from a simple prometheus time series query
-type QueryResponse struct {
-	Endpoint string
-	Status   string `json:"status"`
-	Data     struct {
-		ResultType string `json:"resultType"`
-		Result []QueryResult `json:"result"`
-	} `json:"data"`
-}
-
-// QueryResult - Key-Value formated output of the query
+// QueryResult - Only results
 type QueryResult struct {
 	Metric map[string]string `json:"metric"`
 	Value  []interface{}     `json:"value"`
 }
 
-// Results - Only returns the Results of the Query
-func (obj *QueryResponse) Results() []QueryResult {
-  return obj.Data.Results
+// QueryResponse - The return data from a simple prometheus time series query
+type QueryResponse struct {
+	Status string `json:"status"`
+	Data   struct {
+		ResultType string        `json:"resultType"`
+		Result     []QueryResult `json:"result"`
+	} `json:"data"`
 }
 
 // Query - fetch the data from prometheus API
-func (c Client) Query(metric string) QueryResponse {
+func (c Client) Query(metric string) *QueryResponse {
 	if c.Endpoint == "" {
 		c.Endpoint = "http://127.0.0.1:9090"
 	}
@@ -38,6 +32,10 @@ func (c Client) Query(metric string) QueryResponse {
 	defer res.Body.Close()
 	var obj QueryResponse
 	json.Unmarshal(data, &obj)
-	return obj
+	return &obj
 }
 
+// Result - Only return the result struct of the query
+func (obj *QueryResponse) Result() []QueryResult {
+	return obj.Data.Result
+}
