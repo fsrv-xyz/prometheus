@@ -1,3 +1,3 @@
-module github.com/fsrv-florian/prometheus
+module github.com/fsrv-xyz/prometheus
 
 go 1.15
